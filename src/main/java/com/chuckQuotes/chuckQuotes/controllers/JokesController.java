@@ -1,21 +1,21 @@
 package com.chuckQuotes.chuckQuotes.controllers;
 
-import guru.springframework.norris.chuck.ChuckNorrisQuotes;
+import com.chuckQuotes.chuckQuotes.services.JokeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class JokesController {
-    private final ChuckNorrisQuotes chuckNorrisQuotes;
+    private final JokeService jokeService;
 
-    public JokesController(ChuckNorrisQuotes chuckNorrisQuotes) {
-        this.chuckNorrisQuotes = chuckNorrisQuotes;
+    public JokesController(JokeService jokeService) {
+        this.jokeService = jokeService;
     }
 
     @RequestMapping({"/", ""})
-    public String getJoke(Model model) {
-        model.addAttribute("joke", chuckNorrisQuotes.getRandomQuote());
+    public String showJoke(Model model) {
+        model.addAttribute("joke", jokeService.getJoke());
         return "index";
     }
 }
